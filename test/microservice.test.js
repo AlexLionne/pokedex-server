@@ -51,7 +51,6 @@ describe('Pokemon Microservice Tests', () => {
         it('Starters of generations should have correct number of pokemons', async function () {
             const generations = await api.get('/generations')
             for (const generation of generations.data) {
-                console.log(generation.name, generation.starter.length, POKEMONS_STARTERS[generation.name])
                 expect(generation.starter.length).toBe(parseInt(POKEMONS_STARTERS[generation.name]))
             }
         })
