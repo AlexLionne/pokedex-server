@@ -1,0 +1,23 @@
+{
+  "name": "pokedex-server",
+  "version": "1.0.0",
+  "description": "Catch'em all !",
+  "main": "microservice.js",
+  "scripts": {
+    "pokedex-serer": "node --no-warnings microservice.cjs",
+    "dev": "pm2 start pm2.json --no-daemon",
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@nesga-arc/microservice-boilerplate": "latest",
+    "axios": "^0.21.1",
+    "config-yml": "^0.10.3",
+    "pokedex-promise-v2": "^4.1.1",
+    "socket.io-client": "^4.4.1"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1"
+  }
+}

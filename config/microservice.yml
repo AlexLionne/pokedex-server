@@ -1,0 +1,28 @@
+name: pokedex-server
+functions: ../functions/index.js
+service:
+  type: microservice
+resources:
+  storage:
+    temp: ./temp
+
+routes:
+  - name: getGenerationList
+    params:
+      - page
+    description: "Get Pokemon generations"
+    method: GET
+    endpoint: /generations
+
+  - name: getPokemonsByGeneration
+    params:
+      - page
+    description: "Get Pokemon list by generation"
+    method: GET
+    endpoint: /pokemons/:generation/:page
+
+events:
+  - name: addGeneration
+    description: add a generation of pokemon, trigger a WS event when a wild new generation appears
+  - name: updatePokemon
+    description: update a pokemon {id, attrs, values}

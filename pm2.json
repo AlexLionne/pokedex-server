@@ -1,0 +1,25 @@
+{
+  "apps": [
+    {
+      "name": "pokedex-server",
+      "script": "microservice.js",
+      "merge_logs": true,
+      "max_restarts": 20,
+      "instances": 1,
+      "watch": true,
+      "watch_delay": 1000,
+      "ignore_watch": [
+        "node_modules",
+        ".git"
+      ],
+      "watch_options": {
+        "usePolling": true,
+        "followSymlinks": false
+      },
+      "env": {
+        "NODE_ENV": "development",
+        "PORT": 4000
+      }
+    }
+  ]
+}
