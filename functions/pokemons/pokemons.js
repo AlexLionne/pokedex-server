@@ -17,6 +17,11 @@ module.exports.getGenerationList = async (req, res) => {
     // append starters pokemons to generations
     for (const generation of generationDetails) {
         const [first, second, third] = generation.pokemon_species
+        delete generation.abilities
+        delete generation.moves
+        delete generation.main_region
+        delete generation.version_groups
+        delete generation.types
         generation.starter = await PokedexAPI.getResource([first.url, second.url, third.url])
     }
 
@@ -39,14 +44,14 @@ module.exports.getPokemonsByGeneration = async (req, res) => {
         return res.status(400).send('No page provided !')
     }
 
-    const pokemonGenerations = await PokedexAPI.getGenerationByName(`generation-${generation}`)
+    const pokemonGenerations = await PokedexAPI.getGenerationByName(generation)
     const range = pokemonGenerations.pokemon_species.slice(page * offset, (page + 1) * offset).map(pokemon => pokemon.url)
 
     const pokemons = await PokedexAPI.getResource(range)
 
     // pagination
     const previous = page - 1 > 0 ? page - 1 : null
-    const next = ((page + 1) * offset) >= pokemonGenerations.pokemon_species.length ? page : page + 1
+    const next = ((page + 1) * offset) >= pokemonGenerations.pokemon_species.length ? null : page + 1
 
-    return res.status(200).send({previous, next, results: pokemons})
+    return res.status(200).send({previous: previous, next: next, results: pokemons})
 }
