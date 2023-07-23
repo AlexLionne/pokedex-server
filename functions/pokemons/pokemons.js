@@ -131,6 +131,16 @@ module.exports.getPokemonNames = async (req, res) => {
             ...species,
             {
                 [specie.name]: {
+                    description: specie.flavor_text_entries.reduce((textEntries, textEntry, index) => {
+                        return {...textEntries, [textEntry.language.name]: textEntry}
+                        // todo: get latest entry from latest version of the generation >:(
+                        // <- get latest text entry for language from all Pokemon versions
+                    }, {}),
+                    gender_rate: {
+                        female: 12.5 * specie.gender_rate,
+                        male: 12.5 * (8 - specie.gender_rate),
+                    },
+                    egg_groups: specie.egg_groups,
                     genus: specie.genera.reduce((genera, genus) => {
                         return {...genera, [genus.language.name]: genus.genus}
                     }, {}),
