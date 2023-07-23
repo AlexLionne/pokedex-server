@@ -8,17 +8,11 @@ resources:
 
 routes:
   - name: getGenerationList
-    params:
-      - page
     description: "Get Pokemon generations"
     method: GET
     endpoint: /generations
 
   - name: getPokemonsByGeneration
-    params:
-        -
-          name: page
-          description: pagination
     description: "Get Pokemon list by generation"
     method: GET
     endpoint: /pokemons/:generation/:page
@@ -27,6 +21,11 @@ routes:
     description: "Get Pokemon types"
     method: GET
     endpoint: /pokemons/types
+
+  - name: getPokemonNames
+    description: "Get Pokemon names"
+    method: GET
+    endpoint: /pokemons/names/:generation/:page
 
 events:
   - name: addGeneration
